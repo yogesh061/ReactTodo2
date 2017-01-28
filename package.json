@@ -1,5 +1,5 @@
 {
-  "name": "ReactTodo2",
+  "name": "reacttodo2",
   "version": "1.0.0",
   "description": "React Todo 2",
   "main": "index.js",
@@ -39,5 +39,13 @@
     "script-loader": "^0.6.1",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.13"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yogesh061/ReactTodo2.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yogesh061/ReactTodo2/issues"
+  },
+  "homepage": "https://github.com/yogesh061/ReactTodo2"
 }
