@@ -5,11 +5,17 @@ class Todo extends React.Component {
   constructor(props){
     super(props)
   }
+  handleChange = () => {
+    var {id}  = this.props;
+    this.props.onToggle(id);
+  }
   render() {
-    var {id, text}  = this.props;
+    debugger;
+    var {id, text, completed}  = this.props;
     return(
-      <div>
-        {id}.{text}
+      <div onClick = {this.handleChange}>
+        <input type = 'checkbox' checked = {completed}/>
+        {text}
       </div>
     )
   }

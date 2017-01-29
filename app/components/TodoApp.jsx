@@ -1,8 +1,10 @@
 import React from 'react';
+import uuid from 'node-uuid';
+
 import TodoList from 'TodoList';
 import AddTodo from 'AddTodo';
 import TodoSearch from 'TodoSearch';
-import uuid from 'node-uuid';
+import {setTodos, getTodos} from 'TodoAPI';
 
 class TodoApp extends React.Component {
   constructor (props){
@@ -10,25 +12,12 @@ class TodoApp extends React.Component {
     this.state = {
       showCompleted: false,
       searchText: '',
-      todos:[
-        {
-          id:uuid(),
-          text:"Item 1"
-        },
-        {
-          id:uuid(),
-          text:"Item 2"
-        },
-        {
-          id:uuid(),
-          text:"Item 3"
-        },
-        {
-          id:uuid(),
-          text:"Item 4"
-        }
-      ]
+      todos: getTodos()
     }
+  }
+
+  componentDidUpdate(){
+    setTodos(this.state.todos);
   }
 
   handelAddTodo = (text) => {
@@ -38,7 +27,8 @@ class TodoApp extends React.Component {
             ...this.state.todos,
             {
               text: text,
-              id: uuid()
+              id: uuid(),
+              completed: false
             }
           ]
     })
@@ -51,12 +41,25 @@ class TodoApp extends React.Component {
       }
     )
   }
+
+  handleToggle = (itemId) =>{
+    var updatedTodos = this.state.todos.map((todo) => {
+        if(todo.id === itemId){
+          todo.completed = !todo.completed;
+        }
+        return todo;
+    });
+    this.setState ({
+      todos: updatedTodos
+    })
+    //alert(itemId)
+  }
   render(){
     var {todos} = this.state;
     return(
       <div>
         <TodoSearch onSearch = {this.handleSearch}/>
-        <TodoList todos = {todos}/>
+        <TodoList todos = {todos} onToggle = {this.handleToggle}/>
         <AddTodo onAddTodo = {this.handelAddTodo}/>
       </div>
     )
