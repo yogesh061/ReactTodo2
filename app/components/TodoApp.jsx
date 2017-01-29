@@ -4,7 +4,7 @@ import uuid from 'node-uuid';
 import TodoList from 'TodoList';
 import AddTodo from 'AddTodo';
 import TodoSearch from 'TodoSearch';
-import {setTodos, getTodos} from 'TodoAPI';
+import {setTodos, getTodos, filterTodos} from 'TodoAPI';
 
 class TodoApp extends React.Component {
   constructor (props){
@@ -55,11 +55,12 @@ class TodoApp extends React.Component {
     //alert(itemId)
   }
   render(){
-    var {todos} = this.state;
+    var {todos, showCompleted, searchText} = this.state;
+    var filteredTodos = filterTodos(todos, showCompleted, searchText);
     return(
       <div>
         <TodoSearch onSearch = {this.handleSearch}/>
-        <TodoList todos = {todos} onToggle = {this.handleToggle}/>
+        <TodoList todos = {filteredTodos} onToggle = {this.handleToggle}/>
         <AddTodo onAddTodo = {this.handelAddTodo}/>
       </div>
     )
