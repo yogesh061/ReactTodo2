@@ -5,7 +5,7 @@ class TodoSearch extends React.Component {
     super(props)
     //Not needed in case of arrow function this.handleSearch.bind(this);
   }
-  handleSearch = (e) =>{
+  handleSearch = (e) => {
     var showCompleted = this.showCompleted.checked;
     var searchText  = this.searchText.value;
     this.props.onSearch(showCompleted, searchText);
